@@ -16,3 +16,10 @@ max a b = a > b ? a : b
 
 not :: Boolean -> Boolean
 not x = x -> !x
+
+and :: Boolean -> Boolean -> Boolean
+and x y = x -> y -> x && y
+
+or :: Boolean -> Boolean -> Boolean
+or x y = x -> y -> x || y
+
