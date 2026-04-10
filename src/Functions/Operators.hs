@@ -14,20 +14,20 @@ succ x = x + 1
 max :: Int -> Int -> Int
 max a b = a > b ? a : b
 
-not :: Boolean -> Boolean
+not :: Bool -> Bool
 not x = x -> !x
 
-and :: Boolean -> Boolean -> Boolean
+and :: Bool -> Bool -> Bool
 and x y = x -> y -> x && y
 
-or :: Boolean -> Boolean -> Boolean
+or :: Bool -> Bool -> Bool
 or x y = x -> y -> x || y
 
-nand :: Boolean -> Boolean -> Boolean
+nand :: Bool -> Bool -> Bool
 nand x y = x -> y -> !(x && y)
 
-nor :: Boolean -> Boolean -> Boolean
+nor :: Bool -> Bool -> Bool
 nor x y = x -> y -> !(x || y)
 
-odd :: Integer -> Boolean
+odd :: Int -> Bool
 odd x = x -> x % 2 != 0
