@@ -1,5 +1,5 @@
 module Functions.Operators where
-import Prelude hiding (max,not,odd)
+import Prelude hiding (max,not,odd,and,or,nand,nor)
 
 add :: Int -> Int -> Int
 add x y  = x + y
