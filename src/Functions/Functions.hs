@@ -1,5 +1,5 @@
 module Functions.Functions where
-import Prelude hiding (fact)
+
 -- "Get Programming with Haskell" S. 80
 collatz 1 = 1
 collatz n = if even n
