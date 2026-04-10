@@ -13,3 +13,6 @@ succ x = x + 1
 
 max :: Int -> Int -> Int
 max a b = a > b ? a : b
+
+not :: Boolean -> Boolean
+not x = x -> !x
