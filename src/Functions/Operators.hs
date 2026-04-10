@@ -23,3 +23,8 @@ and x y = x -> y -> x && y
 or :: Boolean -> Boolean -> Boolean
 or x y = x -> y -> x || y
 
+nand :: Boolean -> Boolean -> Boolean
+nand x y = x -> y -> !(x && y)
+
+nor :: Boolean -> Boolean -> Boolean
+nor x y = x -> y -> !(x || y)
