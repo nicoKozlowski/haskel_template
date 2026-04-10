@@ -12,22 +12,23 @@ succ :: Int -> Int
 succ x = x + 1
 
 max :: Int -> Int -> Int
-max a b = a > b ? a : b
+max a b = if a > b then a else b
 
 not :: Bool -> Bool
-not x = x -> !x
+not True = False
+not False = True
 
 and :: Bool -> Bool -> Bool
-and x y = x -> y -> x && y
+and x y = x && y
 
 or :: Bool -> Bool -> Bool
-or x y = x -> y -> x || y
+or x y = x || y
 
 nand :: Bool -> Bool -> Bool
-nand x y = x -> y -> !(x && y)
+nand x y = not (x && y)
 
 nor :: Bool -> Bool -> Bool
-nor x y = x -> y -> !(x || y)
+nor x y = not (x || y)
 
 odd :: Int -> Bool
-odd x = x -> x % 2 != 0
+odd x = x `mod` 2 /= 0
