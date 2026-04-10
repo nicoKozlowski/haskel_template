@@ -28,3 +28,6 @@ nand x y = x -> y -> !(x && y)
 
 nor :: Boolean -> Boolean -> Boolean
 nor x y = x -> y -> !(x || y)
+
+odd :: Integer -> Boolean
+odd x = x -> x % 2 ? false : true
