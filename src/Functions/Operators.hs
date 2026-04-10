@@ -12,4 +12,4 @@ succ :: Int -> Int
 succ x = x + 1
 
 max :: Int -> Int -> Int
-max a b = 0
+max a b = a > b ? a : b
