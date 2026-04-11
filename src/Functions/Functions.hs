@@ -13,8 +13,8 @@ fact :: Int -> Int
 fact n = if n == 0 then 1 else n * fact (n - 1)
 
 binom :: Int -> Int -> Int
-binom n k = else if k < 0 || k > n then 0
-            if k == 0 || k == n then 1
+binom n k = if k < 0 || k > n then 0
+            else if k == 0 || k == n then 1
             else binom (n - 1) (k - 1) + binom (n - 1) k
 
 fib :: Int -> Int
