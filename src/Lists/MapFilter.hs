@@ -6,4 +6,5 @@ sqrs  = map (\x -> x^2) [1..6]
 
 euler1 = sum (filter (\x -> mod x 3 == 0 || mod x 5 == 0) [0..999])
 
-finde = undefined
+finde :: (x -> Bool) -> [x] -> x
+finde x = head . filter x
