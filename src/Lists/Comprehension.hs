@@ -12,6 +12,6 @@ prodsOdd = [x * y | x <- [1..3], y <- [2..5], mod (x + y) 2 /= 0]
 
 cartProd xs ys = [(x, y) | x <- xs, y <- ys]
 
-map = undefined
+map f xs = [f x | x <- xs]
 
-filter = undefined
+filter f xs = [x | x <- xs, f x]
