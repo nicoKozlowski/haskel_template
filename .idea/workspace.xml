@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da4407bb-ada6-4114-9533-230ede3752eb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Lists/Recursion.hs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lists/Recursion.hs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -62,7 +61,7 @@
       <workItem from="1776772882122" duration="309000" />
       <workItem from="1776773373048" duration="2726000" />
       <workItem from="1776776327116" duration="1389000" />
-      <workItem from="1776779377851" duration="3094000" />
+      <workItem from="1776779377851" duration="3420000" />
     </task>
     <servers />
   </component>

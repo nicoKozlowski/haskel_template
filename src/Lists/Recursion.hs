@@ -53,9 +53,19 @@ all f (x:xs)
     | f x = all f xs
     | otherwise = False
 
-maximum = undefined
+maximum :: Ord a => [a] -> a
+maximum [x] = x
+maximum (x:xs)
+    | x > max = x
+    | otherwise = max
+    where max = maximum xs
 
-minimum = undefined
+minimum :: Ord a => [a] -> a
+minimum [x] = x
+minimum (x:xs)
+    | x < min = x
+    | otherwise = min
+    where min = minimum xs
 
 append = undefined
 
