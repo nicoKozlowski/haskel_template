@@ -19,13 +19,21 @@ prod :: Num a => [a] -> a
 prod [] = 1
 prod (x:xs) = x * prod xs
 
-last =
+last :: [a] -> a
+last [x] = x
+last (_:xs) = last xs
 
-init = undefined
+init :: [a] -> [a]
+init [_] = []
+init (x:xs) = x : init xs
 
-elem = undefined
+elem :: Eq a => a -> [a] -> Bool
+elem _ [] = False
+elem x (y:ys)
+    | x == y = True
+    | otherwise = elem x ys
 
-and = undefined
+and
 or = undefined
 
 any = undefined
