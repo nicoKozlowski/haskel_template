@@ -10,7 +10,7 @@ euler1 = sum [x | x <- [0..999], mod x 3 == 0 || mod x 5 == 0]
 
 prodsOdd = [x * y | x <- [1..3], y <- [2..5], mod (x + y) 2 /= 0]
 
-cartProd =
+cartProd xs ys = [(x, y) | x <- xs, y <- ys]
 
 map = undefined
 
