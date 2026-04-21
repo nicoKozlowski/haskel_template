@@ -33,12 +33,25 @@ elem x (y:ys)
     | x == y = True
     | otherwise = elem x ys
 
-and
-or = undefined
+and :: [Bool] -> Bool
+and [] = True
+and (x:xs) = x && and xs
 
-any = undefined
+or :: [Bool] -> Bool
+or [] = False
+or (x:xs) = x || or xs
 
-all = undefined
+any :: (a -> Bool) -> [a] -> Bool
+any _ [] = False
+any f (x:xs)
+    | f x = True
+    | otherwise = any f xs
+
+all :: (a -> Bool) -> [a] -> Bool
+all _ [] = True
+all f (x:xs)
+    | f x = all f xs
+    | otherwise = False
 
 maximum = undefined
 
