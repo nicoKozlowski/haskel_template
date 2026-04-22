@@ -67,9 +67,13 @@ minimum (x:xs)
     | otherwise = min
     where min = minimum xs
 
-append = undefined
+append :: [a] -> [a] -> [a]
+append [] ys = ys
+append (x:xs) ys = x : append xs ys
 
-concat = undefined
+concat :: [[a]] -> [a]
+concat [] = []
+concat (x:xs) = x ++ concat xs
 
 take = undefined
 
