@@ -97,9 +97,15 @@ dropWhile f (x:xs)
     | f x = dropWhile f xs
     | otherwise = x : xs
      
-map = undefined
+map :: (a -> a) -> [a] -> [a]
+map f [] = []
+map f (x:xs) = f x : map f xs
 
-filter = undefined
+filter :: (a -> Bool) -> [a] -> [a]
+filter f [] = []
+filter f (x:xs)
+    | f x = x : filter f xs
+    | otherwise = filter f xs
   
 reverse = undefined
 
