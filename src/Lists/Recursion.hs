@@ -85,9 +85,17 @@ drop 0 xs = xs
 drop n [] = []
 drop n (_:xs) = drop (n - 1) xs
 
-takeWhile = undefined
+takeWhile :: (a -> Bool) -> [a] -> [a]
+takeWhile _ [] = []
+takeWhile f (x:xs)
+    | f x = x : takeWhile f xs
+    | otherwise = []
 
-dropWhile = undefined
+dropWhile :: (a -> Bool) -> [a] -> [a]
+dropWhile f [] = []
+dropWhile f (x:xs)
+    | f x = dropWhile f xs
+    | otherwise = x : xs
      
 map = undefined
 
