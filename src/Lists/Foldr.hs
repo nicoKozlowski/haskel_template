@@ -14,11 +14,11 @@ length = foldr (\_ res -> 1 + res) 0
 
 elem x = foldr (\y res -> y == x || res) False
 
-and = undefined
-or  = undefined
+and = foldr (&&) True
+or  = foldr (||) False
 
-any = undefined
-all = undefined
+any f = foldr (\x res -> f x) False
+all f = foldr (\x res -> f x && res) True
 
 append = undefined
 concat = undefined
