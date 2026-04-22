@@ -20,8 +20,8 @@ or  = foldr (||) False
 any f = foldr (\x res -> f x) False
 all f = foldr (\x res -> f x && res) True
 
-append = undefined
-concat = undefined
+append xs ys = foldr (:) ys xs
+concat = foldr (++) []
 
 map = undefined
 filter = undefined
