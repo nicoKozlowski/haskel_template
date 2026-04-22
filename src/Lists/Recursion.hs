@@ -107,6 +107,14 @@ filter f (x:xs)
     | f x = x : filter f xs
     | otherwise = filter f xs
   
-reverse = undefined
+reverse :: [a] -> [a]
+reverse [] = []
+reverse (x:xs) = reverse xs ++ [x]
 
-partition = undefined
+partition :: (a -> Bool) -> [a] -> ([a], [a])
+partition _ [] = ([], [])
+partition f (x:xs)
+    | f x = (x : ts, fs)
+    | otherwise = (ts, x : fs)
+    where (ts, fs) = partition f xs
+
