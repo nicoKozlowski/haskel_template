@@ -6,13 +6,13 @@ import Prelude hiding (sum,or,filter,
                        elem,concat,minimum,
                        and,map,maximum)
 
-sum = undefined
+sum = foldr (+) 0
 
-prod = undefined
+prod = foldr (*) 1
 
-length = undefined
+length = foldr (\_ res -> 1 + res) 0
 
-elem = undefined
+elem x = foldr (\y res -> y == x || res) False
 
 and = undefined
 or  = undefined
