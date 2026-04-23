@@ -82,8 +82,8 @@ take _ [] = []
 take n (x:xs) = x : take (n - 1) xs
 
 drop :: Int -> [a] -> [a]
-drop n _
-    | n <= 0 = []
+drop n xs
+    | n <= 0 = xs
 drop n [] = []
 drop n (_:xs) = drop (n - 1) xs
 
