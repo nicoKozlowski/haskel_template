@@ -4,7 +4,7 @@ import Functions.Functions
 import Prelude hiding (even, odd, not)
 
 even :: Int -> Bool
-even n = not(odd(n))
+even = not . odd
 
 evenFib :: Int -> Bool
-evenFib n = even(fib(n))
+evenFib = even . fib
