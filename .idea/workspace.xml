@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="da4407bb-ada6-4114-9533-230ede3752eb" name="Changes" comment="" />
+    <list default="true" id="da4407bb-ada6-4114-9533-230ede3752eb" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -66,6 +68,8 @@
       <workItem from="1776938712935" duration="56000" />
       <workItem from="1776951803656" duration="330000" />
       <workItem from="1776952179553" duration="707000" />
+      <workItem from="1776961520468" duration="714000" />
+      <workItem from="1776974174090" duration="213000" />
     </task>
     <servers />
   </component>
