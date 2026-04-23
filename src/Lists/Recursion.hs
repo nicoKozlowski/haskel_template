@@ -97,7 +97,7 @@ dropWhile f (x:xs)
     | f x = dropWhile f xs
     | otherwise = x : xs
      
-map :: (a -> b) -> [a] -> [a]
+map :: (a -> b) -> [a] -> [b]
 map f [] = []
 map f (x:xs) = f x : map f xs
 
