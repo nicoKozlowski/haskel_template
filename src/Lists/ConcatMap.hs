@@ -1,4 +1,5 @@
 module Lists.ConcatMap where
 import Prelude hiding (concatMap)
 
-concatMap = undefined
+concatMap :: (a -> [b]) -> [a] -> [b]
+concatMap f = concat . map f
