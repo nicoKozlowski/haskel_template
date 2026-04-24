@@ -17,10 +17,10 @@ elem :: Eq a => a -> [a] -> Bool
 elem x xs = foldl (\res y -> res || x == y) False xs
 
 and :: [Bool] -> Bool
-and = foldl (&&) False
+and = foldl (&&) True
 
 or :: [Bool] -> Bool
-or  = foldl (||) True
+or  = foldl (||) False
 
 any :: (a -> Bool) -> [a] -> Bool
 any f = foldl (\res x -> res || f x ) False
