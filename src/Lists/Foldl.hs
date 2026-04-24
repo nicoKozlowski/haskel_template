@@ -13,19 +13,28 @@ prod = foldl (*) 1
 length :: [a] -> Int
 length = foldl (\res _ -> res + 1) 0
 
-elem :: Eq a -> [a] -> Bool
-elem x = foldl (\res y -> res || x == y) False
+elem :: Eq a => a -> [a] -> Bool
+elem x xs = foldl (\res y -> res || x == y) False xs
 
-and = undefined
-or  = undefined
+and :: [Bool] -> Bool
+and = foldl (&&) False
 
-any = undefined
-all = undefined
+or :: [Bool] -> Bool
+or  = foldl (||) True
 
-last = undefined
+any :: (a -> Bool) -> [a] -> Bool
+any f = foldl (\res x -> res || f x ) False
 
-concat = undefined
+all :: (a -> Bool) -> [a] -> Bool
+all f = foldl (\res x -> res && f x) True
 
-reverse = undefined
+last :: [a] -> a
+last xs = foldl (\_ x -> x) (head xs) xs
+
+concat :: [[a]] -> [a]
+concat = foldl (++) []
+
+reverse :: [a] -> [a]
+reverse xs = foldl (\res x -> [x] ++ res) [] xs
 
 -- euler5 = undefined
