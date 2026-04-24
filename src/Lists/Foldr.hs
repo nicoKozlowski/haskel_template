@@ -24,7 +24,7 @@ or :: [Bool] -> Bool
 or  = foldr (||) False
 
 any :: (a -> Bool) -> [a] -> Bool
-any f = foldr (\x res -> f x) False
+any f = foldr (\x res -> f x || res) False
 
 all :: (a -> Bool) -> [a] -> Bool
 all f = foldr (\x res -> f x && res) True
