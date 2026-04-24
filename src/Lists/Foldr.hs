@@ -23,11 +23,11 @@ all f = foldr (\x res -> f x && res) True
 append xs ys = foldr (:) ys xs
 concat = foldr (++) []
 
-map = undefined
-filter = undefined
-reverse = undefined
+map f = foldr (\x res -> f x : res) []
+filter f = foldr (\x res -> if f x then x : res else res) []
+reverse xs = foldr (\x res -> res ++ [x]) [] xs
 
-takeWhile = undefined
+takeWhile f = foldr (\x res -> if f x then x : res else []) []
 
-minimum = undefined
-maximum = undefined
+minimum xs = foldr (\x res -> if x < res then x else res) (head xs) xs
+maximum xs = foldr (\x res -> if x > res then x else res) (head xs) xs
