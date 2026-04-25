@@ -72,14 +72,56 @@ init (x:xs) = x : init xs
 elem :: Eq a => a -> [a] -> Bool
 elem _ [] = False
 elem x (y:ys) = (x == y) || elem x ys
+-- Universelle Eigenschaft:
+-- g[] = s
+-- g (x:xs) = f x (g xs)
+-- Transformation:
+-- g = elem x
+-- (1) elem[] = False
+-- (2) elem x (y:ys) = f x (elem x ys)
+-- da elem[] = False ergibt sich in (1) False = s
+-- f bestimmen:
+-- (2) elem x (y:ys) = f x (elem x ys)
+-- = (x == y) || elem x ys = f x (elem x ys)
+-- (x == y) || n = f x n <- Generalisierung elem x ys zu n
+-- f x = \y n -> (x == y) || n
+-- elem x = foldr (\y n -> (x == y) || n) False
 
 and :: [Bool] -> Bool
 and [] = True
 and (x:xs) = x && and xs
+-- Universelle Eigenschaft:
+-- g[] = s
+-- g (x:xs) = f x (g xs)
+-- Transformation:
+-- g = and
+-- (1) and[] = True
+-- (2) and (x:xs) = f x (and xs)
+-- da and[] = True ergibt sich in (1) True = s
+-- f bestimmen:
+-- (2) and (x:xs) = f x (and xs)
+-- = x && and xs = f x (and xs)
+-- x && n = f x n <- Generalisierung and xs zu n
+-- f x = (&&)
+-- and = foldr (&&) True
 
 or :: [Bool] -> Bool
 or [] = False
 or (x:xs) = x || or xs
+-- Universelle Eigenschaft:
+-- g[] = s
+-- g (x:xs) = f x (g xs)
+-- Transformation:
+-- g = or
+-- (1) or[] = False
+-- (2) or (x:xs) = f x (or xs)
+-- da or[] = False ergibt sich in (1) False = s
+-- f bestimmen:
+-- (2) or (x:xs) = f x (or xs)
+-- = x || or xs = f x (or xs)
+-- x || n = f x n <- Generalisierung or xs zu n
+-- f x = (||)
+-- or = foldr (||) False
 
 any :: (a -> Bool) -> [a] -> Bool
 any _ [] = False
@@ -109,7 +151,7 @@ maximum (x:xs) = max x (maximum xs)
 
 minimum :: Ord a => [a] -> a
 minimum [x] = x
-minimum (x:xs) min x (minimum xs)
+minimum (x:xs) = min x (minimum xs)
 
 append :: [a] -> [a] -> [a]
 append [] ys = ys
