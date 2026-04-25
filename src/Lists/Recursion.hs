@@ -77,9 +77,9 @@ elem x (y:ys) = (x == y) || elem x ys
 -- g (x:xs) = f x (g xs)
 -- Transformation:
 -- g = elem x
--- (1) elem[] = False
+-- (1) elem x [] = False
 -- (2) elem x (y:ys) = f x (elem x ys)
--- da elem[] = False ergibt sich in (1) False = s
+-- da elem x [] = False ergibt sich in (1) False = s
 -- f bestimmen:
 -- (2) elem x (y:ys) = f x (elem x ys)
 -- = (x == y) || elem x ys = f x (elem x ys)
@@ -102,7 +102,7 @@ and (x:xs) = x && and xs
 -- (2) and (x:xs) = f x (and xs)
 -- = x && and xs = f x (and xs)
 -- x && n = f x n <- Generalisierung and xs zu n
--- f x = (&&)
+-- f = (&&)
 -- and = foldr (&&) True
 
 or :: [Bool] -> Bool
@@ -120,44 +120,44 @@ or (x:xs) = x || or xs
 -- (2) or (x:xs) = f x (or xs)
 -- = x || or xs = f x (or xs)
 -- x || n = f x n <- Generalisierung or xs zu n
--- f x = (||)
+-- f = (||)
 -- or = foldr (||) False
 
 any :: (a -> Bool) -> [a] -> Bool
 any _ [] = False
-any f (x:xs) = f x || any f xs
+any p (x:xs) = p x || any p xs
 -- Universelle Eigenschaft:
 -- g[] = s
 -- g (x:xs) = f x (g xs)
 -- Transformation:
--- g = any
--- (1) any f [] = s
--- (2) any f (x:xs) = f x (any f xs)
--- da any f [] = False ergibt sich in (1) False = s
+-- g = any p
+-- (1) any p [] = s
+-- (2) any p (x:xs) = f x (any p xs)
+-- da any p [] = False ergibt sich in (1) False = s
 -- f bestimmen:
--- (2) any f (x:xs) = f x (any f xs)
--- = f x || any f xs = f x (any f xs)
--- f x || n = f x n <- Generalisierung any f xs zu n
--- f = \x n -> f x || n
--- any f = foldr (\x n -> f x || n) False
+-- (2) any p (x:xs) = f x (any p xs)
+-- = p x || any p xs = f x (any p xs)
+-- p x || n = f x n <- Generalisierung any p xs zu n
+-- f = \x n -> p x || n
+-- any p = foldr (\x n -> p x || n) False
 
 all :: (a -> Bool) -> [a] -> Bool
 all _ [] = True
-all f (x:xs) = f x && all f xs
+all p (x:xs) = p x && all p xs
 -- Universelle Eigenschaft:
 -- g[] = s
 -- g (x:xs) = f x (g xs)
 -- Transformation:
--- g = all f
--- (1) all f [] = s
--- (2) all f (x:xs) = f x (all f xs)
--- da all f [] = True ergibt sich in (1) True = s
+-- g = all p
+-- (1) all p [] = s
+-- (2) all p (x:xs) = f x (all p xs)
+-- da all p [] = True ergibt sich in (1) True = s
 -- f bestimmen:
--- (2) all f (x:xs) = f x (all f xs)
--- = f x && all f xs = f x (all f xs)
--- f x && n = f x n <- Generalisierung any f xs zu n
--- f = \x n -> f x && n
--- all f = foldr (\x n -> f x && n) False
+-- (2) all p (x:xs) = f x (all p xs)
+-- = p x && all p xs = f x (all p xs)
+-- p x && n = f x n <- Generalisierung all p xs zu n
+-- f = \x n -> p x && n
+-- all p = foldr (\x n -> p x && n) True
 
 maximum :: Ord a => [a] -> a
 maximum [x] = x
@@ -187,7 +187,7 @@ concat (x:xs) = x ++ concat xs
 -- = x ++ concat xs = f x (concat xs)
 -- x ++ n = f x n <- Generalisierung concat xs zu n
 -- f = (++)
--- concat = foldr (\x n -> x ++ n) []
+-- concat = foldr (++) []
 
 take :: Int -> [a] -> [a]
 take n _
@@ -203,44 +203,86 @@ drop n (_:xs) = drop (n - 1) xs
 
 takeWhile :: (a -> Bool) -> [a] -> [a]
 takeWhile _ [] = []
-takeWhile f (x:xs) = if f x then x : takeWhile f xs else []
-
-dropWhile :: (a -> Bool) -> [a] -> [a]
-dropWhile f [] = []
-dropWhile f (x:xs) = if f x then dropWhile f xs else x : xs
-     
-map :: (a -> b) -> [a] -> [b]
-map f [] = []
-map f (x:xs) = f x : map f xs
+takeWhile p (x:xs) = if p x then x : takeWhile p xs else []
 -- Universelle Eigenschaft:
 -- g[] = s
 -- g (x:xs) = f x (g xs)
 -- Transformation:
--- g = map f
--- (1) map f [] = s
--- (2) map f (x:xs) = f x (map f xs)
--- da map f [] = [] ergibt sich in (1) [] = s
+-- g = takeWhile p
+-- (1) takeWhile p [] = s
+-- (2) takeWhile p (x:xs) = f x (takeWhile p xs)
+-- da takeWhile p [] = [] ergibt sich in (1) [] = s
 -- f bestimmen:
--- (2) map f (x:xs) = f x (map f xs)
--- = f x : map f xs = f x (map f xs)
--- f x : n = f x n <- Generalisierung map f xs zu n
--- f = \x n -> f x : n
--- map f = foldr (\x n -> f x : n) []
+-- (2) takeWhile p (x:xs) = f x (takeWhile p xs)
+-- = if p x then x : takeWhile p xs else  [] = f x (takeWhile p xs)
+-- if p x then x : n else [] = f x n <- Generalisierung takeWhile p xs zu n
+-- f p = \x n -> if p x then x : n else []
+-- takeWhile p = foldr (\x n -> if p x then x : n else []) []
+
+dropWhile :: (a -> Bool) -> [a] -> [a]
+dropWhile p [] = []
+dropWhile p (x:xs) = if p x then dropWhile p xs else x : xs
+     
+map :: (a -> b) -> [a] -> [b]
+map p [] = []
+map p (x:xs) = p x : map p xs
+-- Universelle Eigenschaft:
+-- g[] = s
+-- g (x:xs) = f x (g xs)
+-- Transformation:
+-- g = map p
+-- (1) map p [] = s
+-- (2) map p (x:xs) = f x (map p xs)
+-- da map p [] = [] ergibt sich in (1) [] = s
+-- f bestimmen:
+-- (2) map p (x:xs) = f x (map p xs)
+-- = p x : map p xs = f x (map p xs)
+-- p x : n = f x n <- Generalisierung map p xs zu n
+-- f = \x n -> p x : n
+-- map p = foldr (\x n -> p x : n) []
 
 filter :: (a -> Bool) -> [a] -> [a]
-filter f [] = []
-filter f (x:xs)
-    | f x = x : filter f xs
-    | otherwise = filter f xs
-  
+filter p [] = []
+filter p (x:xs)
+    | p x = x : filter p xs
+    | otherwise = filter p xs
+-- Universelle Eigenschaft:
+-- g[] = s
+-- g (x:xs) = f x (g xs)
+-- Transformation:
+-- g = filter p
+-- (1) filter p [] = s
+-- (2) filter p (x:xs) = f x (filter p xs)
+-- da filter p [] = [] ergibt sich in (1) [] = s
+-- f bestimmen:
+-- (2) filter p (x:xs) = f x (filter p xs)
+-- = if p x then x : filter p xs else filter p xs = f x (filter p xs)
+-- if p x then x : n else n = f x n <- Generalisierung filter p xs zu n
+-- f p = \x n -> if p x then x : n else n
+-- filter p = foldr (\x n -> if p x then x : n else n) []
+
 reverse :: [a] -> [a]
 reverse [] = []
 reverse (x:xs) = reverse xs ++ [x]
+-- Universelle Eigenschaft:
+-- g[] = s
+-- g (x:xs) = f x (g xs)
+-- Transformation:
+-- g = reverse
+-- (1) reverse [] = s
+-- (2) reverse (x:xs) = f x (reverse xs)
+-- da reverse [] = [] ergibt sich in (1) [] = s
+-- f bestimmen:
+-- (2) reverse (x:xs) = f x (reverse xs)
+-- = reverse xs ++ [x] = f x (reverse xs)
+-- n ++ [x] = f x n <- Generalisierung reverse xs zu n
+-- f = \x n -> n ++ [x]
+-- reverse = foldr (\x n -> n ++ [x]) []
 
 partition :: (a -> Bool) -> [a] -> ([a], [a])
 partition _ [] = ([], [])
-partition f (x:xs)
-    | f x = (x : ts, fs)
+partition p (x:xs)
+    | p x = (x : ts, fs)
     | otherwise = (ts, x : fs)
-    where (ts, fs) = partition f xs
+    where (ts, fs) = partition p xs
 
