@@ -131,19 +131,33 @@ any f (x:xs) = f x || any f xs
 -- g (x:xs) = f x (g xs)
 -- Transformation:
 -- g = any
--- (1) any[] = s
--- (2) any (x:xs) = f x (any xs)
--- da any[] = False ergibt sich in (1) False = s
+-- (1) any f [] = s
+-- (2) any f (x:xs) = f x (any f xs)
+-- da any f [] = False ergibt sich in (1) False = s
 -- f bestimmen:
--- (2) any (x:xs) = f x (any xs)
--- = f x || any f xs = f x (any xs)
+-- (2) any f (x:xs) = f x (any f xs)
+-- = f x || any f xs = f x (any f xs)
 -- f x || n = f x n <- Generalisierung any f xs zu n
 -- f = \x n -> f x || n
--- any = foldr (\x n -> f x || n) False
+-- any f = foldr (\x n -> f x || n) False
 
 all :: (a -> Bool) -> [a] -> Bool
 all _ [] = True
 all f (x:xs) = f x && all f xs
+-- Universelle Eigenschaft:
+-- g[] = s
+-- g (x:xs) = f x (g xs)
+-- Transformation:
+-- g = all f
+-- (1) all f [] = s
+-- (2) all f (x:xs) = f x (all f xs)
+-- da all f [] = True ergibt sich in (1) True = s
+-- f bestimmen:
+-- (2) all f (x:xs) = f x (all f xs)
+-- = f x && all f xs = f x (all f xs)
+-- f x && n = f x n <- Generalisierung any f xs zu n
+-- f = \x n -> f x && n
+-- all f = foldr (\x n -> f x && n) False
 
 maximum :: Ord a => [a] -> a
 maximum [x] = x
@@ -160,6 +174,20 @@ append (x:xs) ys = x : append xs ys
 concat :: [[a]] -> [a]
 concat [] = []
 concat (x:xs) = x ++ concat xs
+-- Universelle Eigenschaft:
+-- g[] = s
+-- g (x:xs) = f x (g xs)
+-- Transformation:
+-- g = concat
+-- (1) concat[] = s
+-- (2) concat (x:xs) = f x (concat xs)
+-- da concat[] = [] ergibt sich in (1) [] = s
+-- f bestimmen:
+-- (2) concat (x:xs) = f x (concat xs)
+-- = x ++ concat xs = f x (concat xs)
+-- x ++ n = f x n <- Generalisierung concat xs zu n
+-- f = (++)
+-- concat = foldr (\x n -> x ++ n) []
 
 take :: Int -> [a] -> [a]
 take n _
@@ -184,6 +212,20 @@ dropWhile f (x:xs) = if f x then dropWhile f xs else x : xs
 map :: (a -> b) -> [a] -> [b]
 map f [] = []
 map f (x:xs) = f x : map f xs
+-- Universelle Eigenschaft:
+-- g[] = s
+-- g (x:xs) = f x (g xs)
+-- Transformation:
+-- g = map f
+-- (1) map f [] = s
+-- (2) map f (x:xs) = f x (map f xs)
+-- da map f [] = [] ergibt sich in (1) [] = s
+-- f bestimmen:
+-- (2) map f (x:xs) = f x (map f xs)
+-- = f x : map f xs = f x (map f xs)
+-- f x : n = f x n <- Generalisierung map f xs zu n
+-- f = \x n -> f x : n
+-- map f = foldr (\x n -> f x : n) []
 
 filter :: (a -> Bool) -> [a] -> [a]
 filter f [] = []
