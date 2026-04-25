@@ -85,15 +85,25 @@ or (x:xs) = x || or xs
 
 any :: (a -> Bool) -> [a] -> Bool
 any _ [] = False
-any f (x:xs)
-    | f x = True
-    | otherwise = any f xs
+any f (x:xs) = f x || any f xs
+-- Universelle Eigenschaft:
+-- g[] = s
+-- g (x:xs) = f x (g xs)
+-- Transformation:
+-- g = any
+-- (1) any[] = s
+-- (2) any (x:xs) = f x (any xs)
+-- da any[] = False ergibt sich in (1) False = s
+-- f bestimmen:
+-- (2) any (x:xs) = f x (any xs)
+-- = f x || any f xs = f x (any xs)
+-- f x || n = f x n <- Generalisierung any f xs zu n
+-- f = \x n -> f x || n
+-- any = foldr (\x n -> f x || n) False
 
 all :: (a -> Bool) -> [a] -> Bool
 all _ [] = True
-all f (x:xs)
-    | f x = all f xs
-    | otherwise = False
+all f (x:xs) = f x && all f xs
 
 maximum :: Ord a => [a] -> a
 maximum [x] = x
