@@ -14,6 +14,20 @@ length (_:xs) = 1 + length xs
 sum :: Num a => [a] -> a
 sum [] = 0
 sum (x:xs) = x + sum xs
+-- Universelle Eigenschaft:
+-- g[] = s
+-- g (x:xs) = f x (g xs)
+-- Transformation:
+-- g = sum
+-- (1) sum[] = s
+-- (2) sum (x:xs) = f x (sum xs)
+-- da sum[] = 0 ergibt sich in (1) 0 = s
+-- f bestimmen:
+-- (2) sum (x:xs) = f x (sum xs)
+-- = x + sum xs = f x (sum xs)
+-- x + y = f x y <- Generalisierung sum xs zu y
+-- f = (+)
+-- sum = foldr (+) 0
 
 prod :: Num a => [a] -> a
 prod [] = 1
