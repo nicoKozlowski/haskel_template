@@ -10,6 +10,20 @@ import Prelude hiding (sum,all,reverse,
 length :: [a] -> Int
 length [] = 0
 length (_:xs) = 1 + length xs
+-- Universelle Eigenschaft:
+-- g[] = s
+-- g (x:xs) = f x (g xs)
+-- Transformation:
+-- g = length
+-- (1) length[] = s
+-- (2) length (x:xs) = f x (length xs)
+-- da length[] = 0 ergibt sich in (1) 0 = s
+-- f bestimmen:
+-- (2) length (x:xs) = f x (length xs)
+-- = 1 + length xs = f x (length xs)
+-- 1 + n = f x n <- Generalisierung length xs zu n
+-- f = \x n -> 1 + n
+-- length = foldr (\x n -> 1 + n) 0
 
 sum :: Num a => [a] -> a
 sum [] = 0
@@ -32,6 +46,20 @@ sum (x:xs) = x + sum xs
 prod :: Num a => [a] -> a
 prod [] = 1
 prod (x:xs) = x * prod xs
+-- Universelle Eigenschaft:
+-- g[] = s
+-- g (x:xs) = f x (g xs)
+-- Transformation:
+-- g = prod
+-- (1) prod[] = s
+-- (2) prod (x:xs) = f x (prod xs)
+-- da prod[] = 1 ergibt sich in (1) 1 = s
+-- f bestimmen:
+-- (2) prod (x:xs) = f x (prod xs)
+-- = x * prod xs = f x (prod xs)
+-- x * y = f x y <- Generalisierung prod xs zu y
+-- f = (*)
+-- prod = foldr (*) 1
 
 last :: [a] -> a
 last [x] = x
