@@ -71,9 +71,7 @@ init (x:xs) = x : init xs
 
 elem :: Eq a => a -> [a] -> Bool
 elem _ [] = False
-elem x (y:ys)
-    | x == y = True
-    | otherwise = elem x ys
+elem x (y:ys) = (x == y) || elem x ys
 
 and :: [Bool] -> Bool
 and [] = True
@@ -107,17 +105,11 @@ all f (x:xs) = f x && all f xs
 
 maximum :: Ord a => [a] -> a
 maximum [x] = x
-maximum (x:xs)
-    | x > max = x
-    | otherwise = max
-    where max = maximum xs
+maximum (x:xs) = max x (maximum xs)
 
 minimum :: Ord a => [a] -> a
 minimum [x] = x
-minimum (x:xs)
-    | x < min = x
-    | otherwise = min
-    where min = minimum xs
+minimum (x:xs) min x (minimum xs)
 
 append :: [a] -> [a] -> [a]
 append [] ys = ys
@@ -141,15 +133,11 @@ drop n (_:xs) = drop (n - 1) xs
 
 takeWhile :: (a -> Bool) -> [a] -> [a]
 takeWhile _ [] = []
-takeWhile f (x:xs)
-    | f x = x : takeWhile f xs
-    | otherwise = []
+takeWhile f (x:xs) = if f x then x : takeWhile f xs else []
 
 dropWhile :: (a -> Bool) -> [a] -> [a]
 dropWhile f [] = []
-dropWhile f (x:xs)
-    | f x = dropWhile f xs
-    | otherwise = x : xs
+dropWhile f (x:xs) = if f x then dropWhile f xs else x : xs
      
 map :: (a -> b) -> [a] -> [b]
 map f [] = []
